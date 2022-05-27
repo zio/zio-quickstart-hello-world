@@ -11,7 +11,7 @@ We have a dedicated article about this quickstart at the ZIO documentation websi
 First, open the console and clone the project using `git` (or you can simply download the project) and then change the directory:
 
 ```scala
-git clone git@github.com:khajavi/zio-quickstart-hello-world.git 
+git clone git@github.com:zio/zio-quickstart-hello-world.git 
 cd zio-quickstart-hello-world
 ```
 
