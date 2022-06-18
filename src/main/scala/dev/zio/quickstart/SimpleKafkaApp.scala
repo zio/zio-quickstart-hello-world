@@ -48,15 +48,16 @@ object SimpleKafkaApp extends ZIOAppDefault {
 
   def run =
     for {
-      f <- consumeAndPrintEvents("my-consumer-group", KAFKA_TOPIC).fork
-      _ <-
+      c <- consumeAndPrintEvents("my-consumer-group", KAFKA_TOPIC).fork
+      p <-
         Clock.currentDateTime
           .flatMap { time =>
             produce(KAFKA_TOPIC, time.getHour, s"$time -- Hello, World!")
           }
           .schedule(Schedule.spaced(1.second))
           .provide(producer)
-      _ <- f.join
+          .fork
+      _ <- (c <*> p).join
     } yield ()
 
 }
