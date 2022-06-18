@@ -21,15 +21,15 @@ object Event {
     DeriveJsonDecoder.gen[Event]
 }
 
-object EventSerde {
+object KafkaSerde {
   val key: Serde[Any, Int] =
     Serde.int
 
   val value: Serde[Any, Event] =
-    Serde.string.inmapM[Any, Event] { s =>
+    Serde.string.inmapM[Any, Event](s =>
       ZIO.fromEither(s.fromJson[Event])
-        .orDieWith(e => new RuntimeException(e))
-    }(r => ZIO.succeed(r.toJson))
+        .mapError(e => new RuntimeException(e))
+    )(r => ZIO.succeed(r.toJson))
 }
 
 object JsonStreamingKafkaApp extends ZIOAppDefault {
@@ -63,13 +63,13 @@ object JsonStreamingKafkaApp extends ZIOAppDefault {
             Event(uuid, time, "Hello, World!")
           )
         }
-        .via(Producer.produceAll(EventSerde.key, EventSerde.value))
+        .via(Producer.produceAll(KafkaSerde.key, KafkaSerde.value))
         .drain
 
     val c: ZStream[Consumer, Throwable, Nothing] =
       Consumer
         .subscribeAnd(Subscription.topics(KAFKA_TOPIC))
-        .plainStream(EventSerde.key, EventSerde.value)
+        .plainStream(KafkaSerde.key, KafkaSerde.value)
         .tap(e => Console.printLine(e.value))
         .map(_.offset)
         .aggregateAsync(Consumer.offsetBatches)
