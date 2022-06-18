@@ -48,7 +48,7 @@ object SimpleKafkaApp extends ZIOAppDefault {
 
   def run =
     for {
-      c <- consumeAndPrintEvents("my-consumer-group", KAFKA_TOPIC).fork
+      c <- consumeAndPrintEvents("simple-kafka-app", KAFKA_TOPIC).fork
       p <-
         Clock.currentDateTime
           .flatMap { time =>
