@@ -28,13 +28,12 @@ object SimpleKafkaApp extends ZIOAppDefault {
 
   private def consumeAndPrintEvents(
       groupId: String,
-      topic: String,
-      topics: String*
+      topic: String
   ): RIO[Any, Unit] =
     Consumer.consumeWith(
       settings = ConsumerSettings(BOOSTRAP_SERVERS)
         .withGroupId(groupId),
-      subscription = Subscription.topics(topic, topics: _*),
+      subscription = Subscription.topics(topic),
       keyDeserializer = Serde.long,
       valueDeserializer = Serde.string
     )((k, v) => Console.printLine((k, v)).orDie)
