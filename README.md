@@ -4,7 +4,7 @@ This is the simplest quickstart for a ZIO application. You can download and run 
 
 ## Quickstart Guide
 
-We have a dedicated article about this quickstart at the ZIO documentation website called [ZIO Quickstart: Hello World](https://zio.dev/next/quickstarts/zio-quickstart-hello-world)
+We have a dedicated article about this quickstart at the ZIO documentation website called [ZIO Quickstart: Hello World](https://zio.dev/guides/quickstarts/hello-world/)
 
 ## Running The Example
 
