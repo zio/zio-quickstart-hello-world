@@ -14,7 +14,8 @@ inThisBuild(
     ciUpdateReadmeJobs := Seq.empty,
     ciReleaseJobs := Seq.empty,
     ciPostReleaseJobs := Seq.empty,
-    ciCheckWebsiteBuildProcess := Seq.empty
+    ciCheckWebsiteBuildProcess := Seq.empty,
+    ciCheckGithubWorkflowSteps := Seq.empty
   )
 )
 
