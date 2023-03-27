@@ -1,12 +1,16 @@
 enablePlugins(ZioSbtEcosystemPlugin)
 
-ThisBuild / name := "ZIO Quickstart Hello World"
-
-ThisBuild / ciEnabledBranches := Seq("master")
-ThisBuild / ciUpdateReadmeJobs := Seq.empty
-ThisBuild / ciReleaseJobs := Seq.empty
-ThisBuild / ciPostReleaseJobs := Seq.empty
-ThisBuild / ciCheckWebsiteBuildProcess := Seq.empty
+inThisBuild(
+  List(
+    name := "ZIO Quickstart Hello World",
+    ciEnabledBranches := Seq("master"),
+    ciTargetScalaVersions := makeTargetScalaMap(root).value,
+    ciUpdateReadmeJobs := Seq.empty,
+    ciReleaseJobs := Seq.empty,
+    ciPostReleaseJobs := Seq.empty,
+    ciCheckWebsiteBuildProcess := Seq.empty
+  )
+)
 
 lazy val root =
   project
