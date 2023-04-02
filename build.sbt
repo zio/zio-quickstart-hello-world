@@ -37,7 +37,7 @@ lazy val zioQuickstartKafka =
     .settings(enableZIO(enableStreaming = true))
     .settings(
       libraryDependencies ++= Seq(
-        "dev.zio" %% "zio-kafka" % "2.0.0-M3",
-        "dev.zio" %% "zio-json" % "0.5.0"
+        "dev.zio" %% "zio-kafka" % "2.2",
+        "dev.zio" %% "zio-json" % "0.3.0-RC7"
       )
     )
